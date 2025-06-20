@@ -5,8 +5,8 @@ import {RouterOutlet} from '@angular/router';
   selector: 'app-pages',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './pages.components.html',
+  templateUrl: './pages.component.html',
 })
-export class PagesComponents {
+export class PagesComponent {
 
 }
