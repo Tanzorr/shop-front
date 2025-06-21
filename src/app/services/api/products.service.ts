@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsService {
-  private basUrl = 'api/products';
+  private basUrl = 'http://127.0.0.1:8000/api/products';
   private http = inject(HttpClient);
 
   public getAll(): Observable<any> {

@@ -1,11 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import { getProductsSuccess } from './products-acitons';
+import {Injectable} from '@angular/core';
 
 export interface ProductsStateModel {
   products: any[];
   loading: boolean;
   error: any;
 }
+
+
 
 export interface ProductsState {
   products: ProductsStateModel;

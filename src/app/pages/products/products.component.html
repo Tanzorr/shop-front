@@ -6,6 +6,7 @@
     <h3>Products</h3>
     <p>Here you can find a list of products.</p>
     <ul>
+      {{ products$ | async | json }}
     </ul>
   </div>
 </app-two-colum>
