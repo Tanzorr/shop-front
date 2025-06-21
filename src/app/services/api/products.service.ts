@@ -5,11 +5,11 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PasswordService {
+export class ProductsService {
   private basUrl = 'api/products';
   private http = inject(HttpClient);
 
-  public getProducts(): Observable<any> {
+  public getAll(): Observable<any> {
     return this.http.get(this.basUrl);
   }
 }

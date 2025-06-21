@@ -13,8 +13,7 @@ interface NavLink {
   selector: 'app-navigation',
   imports: [
     RouterLink,
-    RouterLinkActive,
-    OneColumnComponent
+    RouterLinkActive
   ],
   templateUrl: './navigation.components.html',
   styleUrl: './navigation.components.scss',
