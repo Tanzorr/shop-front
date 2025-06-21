@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
+import {OneColumnComponent} from '../../layouts/one-column/one-column.component';
 
 interface NavLink {
   label: string;
@@ -12,7 +13,8 @@ interface NavLink {
   selector: 'app-navigation',
   imports: [
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    OneColumnComponent
   ],
   templateUrl: './navigation.components.html',
   styleUrl: './navigation.components.scss',
