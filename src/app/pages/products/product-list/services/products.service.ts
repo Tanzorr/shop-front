@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ProductsState} from '../../../store/products-reducers';
+import {ProductsState} from '../../../../store/products-reducers';
 import {Store} from '@ngrx/store';
-import {getProducts} from '../../../store/products-acitons';
-import {productsResponseSelector, productsResponseSelectors} from '../../../store/products-response-selectors';
+import {getProducts} from '../../../../store/products-acitons';
+import {productsResponseSelector, productsResponseSelectors} from '../../../../store/products-response-selectors';
 
 @Injectable({
   providedIn: 'root'

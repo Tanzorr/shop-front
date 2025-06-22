@@ -3,22 +3,7 @@
     <h3>Categories</h3>
   </div>
   <div right>
-    <h3>Products</h3>
-    <p>Here you can find a list of products.</p>
-    @if (productsResponse$ | async; as productsResponse) {
-      <ul>
-        @for (product of productsResponse?.data; track product.id) {
-          <li>
-            <div>
-              <h4>{{ product.name }}</h4>
-              <p>{{ product.description }}</p>
-              <p>Price: {{ product.salePrice }}</p>
-              <button class="btn btn-primary">Add to Cart</button>
-            </div>
-          </li>
-        }
-      </ul>
-    }
+     <app-product-list></app-product-list>
     <ul>
     </ul>
   </div>
