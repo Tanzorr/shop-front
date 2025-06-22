@@ -1,11 +1,12 @@
 import {createAction} from '@ngrx/store';
+import {ProductResponse} from '../models/products';
 
 export const getProducts = createAction(
   '[Products] Get Products'
 );
 export const getProductsSuccess = createAction(
   '[Products] Get Products Success',
-  (products: any[]) => ({products})
+  (products: ProductResponse) => ({products})
 );
 
 export const getProductsFailure = createAction(

@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { getProductsSuccess } from './products-acitons';
-import {Injectable} from '@angular/core';
+import { ProductResponse} from '../models/products';
 
 export interface ProductsStateModel {
-  products: any[];
+  productsResponse: ProductResponse | null;
   loading: boolean;
   error: any;
 }
@@ -15,16 +15,16 @@ export interface ProductsState {
 }
 
 const initialState: ProductsStateModel = {
-  products: [],
+  productsResponse: null,
   loading: false,
   error: null,
 };
 
 export const productsReducer = createReducer(
   initialState,
-  on(getProductsSuccess, (state, { products }) => ({
+  on(getProductsSuccess, (state, {products}) => ({
     ...state,
-    products,
+    productsResponse: products,
     loading: false,
     error: null,
   }))
