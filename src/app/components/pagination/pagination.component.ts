@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PaginationLink} from '../../models/media';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [],
+  imports: [
+    NgClass
+  ],
   templateUrl: './pagination.component.html'
 })
 export class PaginationComponent {

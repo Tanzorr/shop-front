@@ -1,9 +1,9 @@
 import {createAction} from '@ngrx/store';
-import {ProductResponse} from '../models/products';
+import {PageQueryParams, ProductResponse} from '../models/products';
 
 export const getProducts = createAction(
   '[Products] Get Products',
-  (params?: any) => ({params})
+  (params?: string) => ({params})
 );
 export const getProductsSuccess = createAction(
   '[Products] Get Products Success',

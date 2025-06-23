@@ -13,7 +13,11 @@ export class ProductsService {
   public productsResponse$ = this.store.select(productsResponseSelector);
   public productsLoading$ = this.store.select(state => state.products.loading);
 
-  public getProducts(pageQueryParams?: PageQueryParams) {
-    this.store.dispatch(getProducts(pageQueryParams?.paginationLinkUrl))
+  public getProducts(pageQueryParams: PageQueryParams) {
+    const paramStringsArr = [];
+    const stringParams = Object.entries(pageQueryParams)
+      .map(([key, val]) => `${key}=${val}`)
+      .join('&');
+    this.store.dispatch(getProducts(stringParams))
   }
 }

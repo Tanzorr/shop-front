@@ -1,0 +1,18 @@
+<form [formGroup]="searchForm" class="input-group {{ customClass }}">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search..."
+    formControlName="query"
+    aria-label="Search"
+  />
+  @if (searchForm.get('query')?.value){
+    <span
+      class="input-group-text btn btn-link"
+      (click)="clearSearch()"
+      title="Clear"
+    >
+    <i class="bi bi-x-circle"></i>
+  </span>
+  }
+</form>
