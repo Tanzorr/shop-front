@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'

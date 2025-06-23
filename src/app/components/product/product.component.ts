@@ -1,10 +1,13 @@
 import {Component, HostBinding, Input} from '@angular/core';
 import {Product} from '../../models/products';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [],
+  imports: [
+    JsonPipe
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
