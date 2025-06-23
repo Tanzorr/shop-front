@@ -3,5 +3,12 @@
     @for (product of productsResponse?.data; track product.id) {
       <app-product [product]="product"></app-product>
     }
+    <div class="m-3">
+      <app-pagination
+        [paginationLinks]="productsResponse.links"
+        (pageChange)="changePage($event)"
+      ></app-pagination>
+    </div>
+
   </div>
 }

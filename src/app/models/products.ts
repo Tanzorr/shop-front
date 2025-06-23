@@ -20,6 +20,9 @@ export interface ProductResponse {
   total: number;
   to: number;
   error: string | null;
+  perPage: number;
+  next_page_url: string | null;
+  prev_page_url: string | null;
 }
 
 export interface ProductsState {
@@ -32,4 +35,16 @@ export interface PageLinks {
   url: string | null;
   label: string;
   active: boolean;
+}
+
+export interface PageQueryParams {
+  page?: number;
+  perPage?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  search?: string;
+  categoryId?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  paginationLinkUrl?: string;
 }

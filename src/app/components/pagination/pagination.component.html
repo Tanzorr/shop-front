@@ -1,0 +1,7 @@
+<ul class="pagination">
+  @for (i of paginationLinks; track i) {
+    <li class="page-item" [class.active]="i.active">
+      <button class="page-link" (click)=changePage(i.url)>{{ i.label }}</button>
+    </li>
+  }
+</ul>

@@ -4,6 +4,7 @@ import { getProducts, getProductsFailure, getProductsSuccess } from './products-
 import { exhaustMap, map, catchError, of } from 'rxjs';
 import { ProductsService } from '../services/api/products.service';
 import { Injectable } from '@angular/core';
+import {Action} from '@ngrx/store';
 
 @Injectable()
 export class ProductsEffects {
@@ -13,8 +14,8 @@ export class ProductsEffects {
   getProducts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(getProducts),
-      exhaustMap(() =>
-        this.productService.getAll().pipe(
+      exhaustMap((action) =>
+        this.productService.getAll(action.params).pipe(
           map(products => getProductsSuccess(products)),
           catchError(error => of(getProductsFailure(error)))
         )

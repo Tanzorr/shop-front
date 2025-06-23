@@ -2,7 +2,8 @@ import {createAction} from '@ngrx/store';
 import {ProductResponse} from '../models/products';
 
 export const getProducts = createAction(
-  '[Products] Get Products'
+  '[Products] Get Products',
+  (params?: any) => ({params})
 );
 export const getProductsSuccess = createAction(
   '[Products] Get Products Success',
