@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {TwoColumComponents} from '../../layouts/two-colum/two-colum.components';
 import {ProductListComponent} from './product-list/product-list.component';
+import {TwoColumnComponents} from '../../layouts/two-colum/two-column-component';
 
 @Component({
   selector: 'app-products',
+  standalone: true,
   imports: [
-    TwoColumComponents,
+    TwoColumnComponents,
     ProductListComponent,
   ],
   templateUrl: './products.component.html',

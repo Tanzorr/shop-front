@@ -1,5 +1,5 @@
 import {createAction} from '@ngrx/store';
-import {PageQueryParams, ProductResponse} from '../models/products';
+import { ProductResponse} from '../models/products';
 
 export const getProducts = createAction(
   '[Products] Get Products',
