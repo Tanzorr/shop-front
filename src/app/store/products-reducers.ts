@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { getProductsSuccess } from './products-acitons';
+import { getProductsSuccess } from './products-actions';
 import { ProductResponse} from '../models/products';
 
 export interface ProductsStateModel {
