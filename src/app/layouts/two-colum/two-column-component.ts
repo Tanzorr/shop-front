@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
-  selector: 'app-two-colum',
-  imports: [],
+  selector: 'app-two-column',
   standalone: true,
-  templateUrl: './two-colum.components.html',
+  imports: [],
+  templateUrl: './two-column-component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TwoColumComponents {
+export class TwoColumnComponents {
 
 }

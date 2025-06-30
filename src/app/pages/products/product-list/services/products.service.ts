@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {ProductsState} from '../../../../store/products-reducers';
 import {Store} from '@ngrx/store';
-import {getProducts} from '../../../../store/products-acitons';
+import {getProducts} from '../../../../store/products-actions';
 import {productsResponseSelector} from '../../../../store/products-response-selectors';
 import {PageQueryParams} from '../../../../models/products';
 
@@ -14,7 +14,7 @@ export class ProductsService {
   public productsLoading$ = this.store.select(state => state.products.loading);
 
   public getProducts(pageQueryParams: PageQueryParams) {
-    const paramStringsArr = [];
+
     const stringParams = Object.entries(pageQueryParams)
       .map(([key, val]) => `${key}=${val}`)
       .join('&');

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import {TwoColumComponents} from '../../layouts/two-colum/two-colum.components';
+import {TwoColumnComponents} from '../../layouts/two-colum/two-column-component';
+
 
 @Component({
   selector: 'app-footer',
   standalone: true,
   imports: [
-    TwoColumComponents
+    TwoColumnComponents,
   ],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
 

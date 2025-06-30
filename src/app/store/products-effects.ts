@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
-import { getProducts, getProductsFailure, getProductsSuccess } from './products-acitons';
+import { getProducts, getProductsFailure, getProductsSuccess } from './products-actions';
 import { exhaustMap, map, catchError, of } from 'rxjs';
 import { ProductsService } from '../services/api/products.service';
 import { Injectable } from '@angular/core';
