@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {TwoColumComponents} from '../../layouts/two-colum/two-colum.components';
+import {ProductListComponent} from './product-list/product-list.component';
 
 @Component({
   selector: 'app-products',
-  imports: [],
+  imports: [
+    TwoColumComponents,
+    ProductListComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent {
+export class ProductsComponent{
+
 
 }
