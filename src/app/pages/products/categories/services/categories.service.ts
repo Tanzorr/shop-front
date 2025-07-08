@@ -1,8 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {CategoriesState} from '../../../../store/categories/categories-reducers';
 import {Store} from '@ngrx/store';
-import {getCategories} from '../../../../store/categories/categories-actions';
+import {getCategories, setSelectedCategoryIds} from '../../../../store/categories/categories-actions';
 import {categoriesSelectors} from '../../../../store/categories/categories-selectors';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,9 @@ export class CategoriesService {
 
   public getCategories() {
     this.store.dispatch(getCategories());
+  }
+
+  public setSelectedCategoryIds(selectedCategoryIds: number[]) {
+    this.store.dispatch(setSelectedCategoryIds(selectedCategoryIds))
   }
 }

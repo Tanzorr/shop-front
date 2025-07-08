@@ -7,6 +7,7 @@ export interface ProductsStateModel {
   productsResponse: ProductResponse | null;
   loading: boolean;
   error: any;
+  selectedCategoryIds?: number[]; // Optional property to hold selected category IDs
 }
 
 export interface ProductsState {

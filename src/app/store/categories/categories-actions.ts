@@ -16,3 +16,9 @@ export const getCategoriesFailure = createAction(
   (error: any) => ({error})
 );
 
+
+export const setSelectedCategoryIds = createAction(
+  '[CategoryListComponent] Set Selected Category Ids',
+  (selectedCategoryIds: number[]) => ({selectedCategoryIds})
+);
+

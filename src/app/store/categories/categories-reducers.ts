@@ -1,10 +1,15 @@
 import {createReducer, on} from '@ngrx/store';
-import {getCategoriesFailure, getCategoriesSuccess} from './categories-actions';
+import {
+  getCategoriesFailure,
+  getCategoriesSuccess,
+  setSelectedCategoryIds
+} from './categories-actions';
 import {CategoryResponse} from '../../models/category';
 
 export interface CategoriesStateModel {
   categoriesResponse: CategoryResponse | null; // Replace 'any' with the actual type of your categories response
   loading: boolean;
+  selectedCategoryIds?: number[]; // Optional property to hold selected category IDs
   error: any;
 }
 
@@ -15,6 +20,7 @@ export interface CategoriesState {
 const initialState: CategoriesStateModel = {
   categoriesResponse: null,
   loading: false,
+  selectedCategoryIds: [], // Initialize with an empty array
   error: null,
 };
 
@@ -32,4 +38,9 @@ export const categoriesReducer = createReducer(
     loading: false,
     error,
   })),
+
+  on(setSelectedCategoryIds, (state , { selectedCategoryIds }) => ({
+    ...state,
+   selectedCategoryIds: selectedCategoryIds || [], // Ensure it's always an array
+  }))
 );
