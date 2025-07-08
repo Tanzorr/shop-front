@@ -14,4 +14,5 @@ export interface PageQueryParams {
   minPrice?: number;
   maxPrice?: number;
   paginationLinkUrl?: string;
+  category_ids?: number[]; // Optional property to hold selected category IDs
 }

@@ -29,7 +29,7 @@ export class CategoryListComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(
       (categoriesResponse) => {
-        this.categories.set(categoriesResponse.data);
+        this.categories.set(categoriesResponse?.data);
       }
     );
   }
