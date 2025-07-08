@@ -1,14 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { getProductsSuccess } from './products-actions';
-import { ProductResponse} from '../models/products';
+
+import { ProductResponse} from '../../models/products';
+import {getProductsSuccess} from './products-actions';
 
 export interface ProductsStateModel {
   productsResponse: ProductResponse | null;
   loading: boolean;
   error: any;
 }
-
-
 
 export interface ProductsState {
   products: ProductsStateModel;

@@ -4,11 +4,14 @@ import { provideRouter } from '@angular/router';
 import {routes } from './app.routes';
 
 import {provideStore} from '@ngrx/store';
-import {productsReducer} from './store/products-reducers';
+import {productsReducer} from './store/products/products-reducers';
 import {provideEffects} from '@ngrx/effects';
-import {ProductsEffects} from './store/products-effects';
+
 import {provideHttpClient} from '@angular/common/http';
 import {provideStoreDevtools} from '@ngrx/store-devtools';
+import {categoriesReducer} from './store/categories/categories-reducers';
+import {CategoriesEffects} from './store/categories/categories-effects';
+import {ProductsEffects} from './store/products/products-effects';
 
 
 
@@ -19,10 +22,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideStore({
-      productsReducer
+      productsReducer,
+      categoriesReducer
     }),
     provideEffects([
-      ProductsEffects
+      ProductsEffects,
+      CategoriesEffects
     ]),
     provideStoreDevtools({
       maxAge: 25, // Optional: number of actions to retain

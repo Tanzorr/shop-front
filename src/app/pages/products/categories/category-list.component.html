@@ -1,0 +1,13 @@
+@if (categoriesResponse$ | async; as categoryResponse) {
+  <ul class="space-y-2">
+    @for (category of categoryResponse.data; track category.id) {
+      <li class="flex items-center gap-2 bg-white rounded-lg shadow p-3 hover:bg-gray-100 transition">
+        <label class="category-label">
+          <input type="checkbox"
+                 class="accent-blue-600 w-4 h-4 rounded border-gray-300 focus:ring-blue-500">
+          <span class="text-gray-800 font-medium">{{ category.name }}</span>
+        </label>
+      </li>
+    }
+  </ul>
+}

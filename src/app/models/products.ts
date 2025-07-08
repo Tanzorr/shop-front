@@ -1,3 +1,5 @@
+import {PageLinks} from './pagination';
+
 export interface Product {
   id: number;
   name: string;
@@ -25,26 +27,3 @@ export interface ProductResponse {
   prev_page_url: string | null;
 }
 
-export interface ProductsState {
-  productsResponse: ProductResponse | null;
-  loading: boolean;
-  error: any;
-}
-
-export interface PageLinks {
-  url: string | null;
-  label: string;
-  active: boolean;
-}
-
-export interface PageQueryParams {
-  page?: number;
-  perPage?: number;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
-  search?: string;
-  categoryId?: number;
-  minPrice?: number;
-  maxPrice?: number;
-  paginationLinkUrl?: string;
-}

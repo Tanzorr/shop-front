@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FooterComponent} from './presentational/footer/footer.component';
-import {ProductsEffects} from './store/products-effects';
+import {ProductsEffects} from './store/products/products-effects';
 import {EffectsModule, provideEffects} from '@ngrx/effects';
 import {NavigationComponents} from './presentational/navigation.components/navigation.components';
 

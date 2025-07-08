@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
-import {ProductsState} from '../../../../store/products-reducers';
+import {ProductsState} from '../../../../store/products/products-reducers';
 import {Store} from '@ngrx/store';
-import {getProducts} from '../../../../store/products-actions';
-import {productsResponseSelector} from '../../../../store/products-response-selectors';
-import {PageQueryParams} from '../../../../models/products';
+import {getProducts} from '../../../../store/products/products-actions';
+import {productsResponseSelector} from '../../../../store/products/products-response-selectors';
+import {PageQueryParams} from '../../../../models/pagination';
 
 @Injectable({
   providedIn: 'root'
