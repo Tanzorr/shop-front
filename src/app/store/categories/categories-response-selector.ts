@@ -1,7 +1,9 @@
-export const selectedCategoryIdsSelector = (state: any) => {
-  return state.categoriesReducer.selectedCategoryIds || [];
+import {Category} from '../../models/category';
+import {RootState} from '../../models/root-state';
+
+export const selectedCategoryIdsSelector = (state:RootState ):number[] => state.categoriesReducer.selectedCategoryIds || [];
+
+export const categoriesListSelector = (state: RootState):Category[] => {
+  return  state.categoriesReducer.categoriesResponse?.data || [];
 }
 
-export const categoriesListSelector = (state: any) => {
-  return state.categoriesReducer.categoriesResponse?.data || [];
-}

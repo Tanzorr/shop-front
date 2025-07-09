@@ -5,13 +5,14 @@ import {getCategories, setSelectedCategoryIds} from '../../../../store/categorie
 import {
   categoriesListSelector,
 } from '../../../../store/categories/categories-response-selector';
+import {RootState} from '../../../../models/root-state';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
-  private store:Store<CategoriesState> =inject(Store);
+  private store:Store<RootState> =inject(Store);
   public categories$ = this.store.select(categoriesListSelector);
   public selectedCategoriesIds = signal<number[]>([]);
   readonly selectedCategoryIds$ = computed(() => this.selectedCategoriesIds());

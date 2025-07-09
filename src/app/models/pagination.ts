@@ -5,14 +5,14 @@ export interface PageLinks {
 }
 
 export interface PageQueryParams {
-  page?: number;
-  perPage?: number;
+  page?: string;
+  perPage?: string;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
-  search?: string;
+  search?: string | null;
   categoryId?: number;
-  minPrice?: number;
-  maxPrice?: number;
+  minPrice?: string;
+  maxPrice?: string;
   paginationLinkUrl?: string;
   category_ids?: number[]; // Optional property to hold selected category IDs
 }

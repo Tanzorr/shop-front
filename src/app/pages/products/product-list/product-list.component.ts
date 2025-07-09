@@ -21,17 +21,18 @@ import {SearchComponent} from '../../../components/search/search.component';
 })
 export class ProductListComponent implements OnInit {
   private _productsService = inject(ProductsService);
-  productsResponse$: Observable<ProductResponse> = this._productsService.productsResponse$;
+  productsResponse$: Observable<ProductResponse | null> = this._productsService.productsResponse$;
 
   ngOnInit(): void {
     this._productsService.getProducts({});
   }
 
-  changePage(url: any) {
+  changePage(url: string | null): void {
+
     this._productsService.changePage(url);
   }
 
-  getSearchValue($event: string) {
+  getSearchValue($event: string | null):void {
     this._productsService.searchValue($event)
   }
 }

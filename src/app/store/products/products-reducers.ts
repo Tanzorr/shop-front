@@ -4,15 +4,12 @@ import { ProductResponse} from '../../models/products';
 import {getProductsSuccess} from './products-actions';
 
 export interface ProductsStateModel {
-  productsResponse: ProductResponse | null;
+  productsResponse: ProductResponse | null; // Changed to allow null for initial state
   loading: boolean;
   error: any;
   selectedCategoryIds?: number[]; // Optional property to hold selected category IDs
 }
 
-export interface ProductsState {
-  products: ProductsStateModel;
-}
 
 const initialState: ProductsStateModel = {
   productsResponse: null,

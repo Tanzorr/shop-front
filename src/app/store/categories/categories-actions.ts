@@ -1,5 +1,6 @@
 import {createAction} from '@ngrx/store';
 import {CategoryResponse} from '../../models/category';
+import {PageQueryParams} from '../../models/pagination';
 
 export const getCategories = createAction(
   '[CategoryListComponent] Get CategoryListComponent',

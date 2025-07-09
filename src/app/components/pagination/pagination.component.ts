@@ -14,7 +14,7 @@ export class PaginationComponent {
   @Input() paginationLinks: PaginationLink[] = [];
   @Output() pageChange = new EventEmitter<string | null>();
 
-  changePage(url: string | null) {
+  changePage(url: string | null): void {
     this.pageChange.emit(url);
   }
 }

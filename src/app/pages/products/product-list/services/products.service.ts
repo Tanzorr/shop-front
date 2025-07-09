@@ -1,18 +1,19 @@
 import {DestroyRef, inject, Injectable, signal} from '@angular/core';
-import {ProductsState} from '../../../../store/products/products-reducers';
 import {Store} from '@ngrx/store';
 import {getProducts} from '../../../../store/products/products-actions';
 import {productsResponseSelector} from '../../../../store/products/products-response-selectors';
 import {PageQueryParams} from '../../../../models/pagination';
 import {selectedCategoryIdsSelector} from '../../../../store/categories/categories-response-selector';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ProductsStateModel} from '../../../../store/products/products-reducers';
+import {RootState} from '../../../../models/root-state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
   private  destroyRef = inject(DestroyRef);
-  private store: Store<ProductsState> = inject(Store);
+  private store: Store<RootState> = inject(Store);
   public productsResponse$ = this.store.select(productsResponseSelector);
   public selectedProductIds$ = this.store.select(selectedCategoryIdsSelector);
   public selectedCategoriesIds = signal<number[]>([]);
@@ -32,13 +33,15 @@ export class ProductsService {
     this.store.dispatch(getProducts(stringParams))
   }
 
-  public searchValue(searchValue: string) {
+  public searchValue(searchValue: string | null): void {
     const params = {search: searchValue, category_ids: this.selectedCategoriesIds()};
     this.getProducts(params);
   }
-  public changePage(url:any){
-    const urlArr = url.toString().trim().split('=');
-    const pageNumber = urlArr[urlArr.length - 1];
-    this.getProducts({page: pageNumber,  category_ids:this.selectedCategoriesIds()})
+  public changePage(url: string | null): void {
+    if(url) {
+      const urlArr = url.toString().trim().split('=');
+      const pageNumber = urlArr[urlArr.length - 1];
+      this.getProducts({page: pageNumber,  category_ids:this.selectedCategoriesIds()})
+    }
   }
 }
