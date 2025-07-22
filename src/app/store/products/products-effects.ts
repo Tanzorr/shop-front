@@ -13,11 +13,11 @@ export class ProductsEffects {
   getProducts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(getProducts),
-      exhaustMap((action) =>
-        this.productService.getAll(action.params).pipe(
+      exhaustMap((action) =>{
+       return  this.productService.getAll(action.params).pipe(
           map(products => getProductsSuccess(products)),
           catchError(error => of(getProductsFailure(error)))
-        )
+        )}
       )
     );
   });

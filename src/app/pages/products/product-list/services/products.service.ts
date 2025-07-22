@@ -5,21 +5,20 @@ import {productsResponseSelector} from '../../../../store/products/products-resp
 import {PageQueryParams} from '../../../../models/pagination';
 import {selectedCategoryIdsSelector} from '../../../../store/categories/categories-response-selector';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ProductsStateModel} from '../../../../store/products/products-reducers';
 import {RootState} from '../../../../models/root-state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  private  destroyRef = inject(DestroyRef);
-  private store: Store<RootState> = inject(Store);
-  public productsResponse$ = this.store.select(productsResponseSelector);
-  public selectedProductIds$ = this.store.select(selectedCategoryIdsSelector);
+  private  _destroyRef = inject(DestroyRef);
+  private _store: Store<RootState> = inject(Store);
+  public productsResponse$ = this._store.select(productsResponseSelector);
+  public selectedProductIds$ = this._store.select(selectedCategoryIdsSelector);
   public selectedCategoriesIds = signal<number[]>([]);
   constructor() {
     this.selectedProductIds$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((selectedCategoriesIds) => {
         this.getProducts({category_ids: selectedCategoriesIds});
         this.selectedCategoriesIds.set(selectedCategoriesIds);
@@ -30,7 +29,7 @@ export class ProductsService {
     const stringParams = Object.entries(pageQueryParams)
       .map(([key, val]) => `${key}=${val}`)
       .join('&');
-    this.store.dispatch(getProducts(stringParams))
+    this._store.dispatch(getProducts(stringParams))
   }
 
   public searchValue(searchValue: string | null): void {

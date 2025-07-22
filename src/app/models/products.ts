@@ -11,7 +11,7 @@ export interface Product {
   updatedAt: Date;
 }
 
-export interface ProductResponse {
+export interface ProductsResponse {
   currentPage: number;
   data: Product[];
   firstPageUrl: string;
