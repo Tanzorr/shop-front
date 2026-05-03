@@ -1,14 +1,12 @@
-import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, inject, OnInit} from '@angular/core';
 import {ProductService} from './services/product.service';
-import {AsyncPipe, JsonPipe} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {AsyncPipe} from '@angular/common';
 
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
-    JsonPipe,
     AsyncPipe
   ],
   templateUrl: './product.component.html',
@@ -17,12 +15,11 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProductComponent implements OnInit{
   private _productService = inject(ProductService);
-  private _route: ActivatedRoute = inject(ActivatedRoute);
   product$ = this._productService.product$;
 
+  @Input() id!: string;
 
   ngOnInit(): void {
-  const productId = this._route.snapshot.paramMap.get('id');
-    this._productService.getProduct(Number(productId));
+    this._productService.getProduct(Number(this.id));
   }
 }

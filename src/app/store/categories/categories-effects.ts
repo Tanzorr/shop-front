@@ -2,8 +2,9 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, map, of, switchMap} from 'rxjs';
 import {CategoriesService} from '../../services/api/categories.service';
 import {getCategories, getCategoriesFailure, getCategoriesSuccess} from './categories-actions';
-import {inject} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 
+@Injectable()
 export class CategoriesEffects {
   private  actions$: Actions = inject(Actions);
   private categoriesService = inject(CategoriesService);

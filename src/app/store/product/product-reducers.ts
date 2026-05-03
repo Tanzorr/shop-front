@@ -1,10 +1,11 @@
 import {createReducer, on} from '@ngrx/store';
 import {getProductFailure, getProductSuccess} from './product-actions';
+import {Product} from '../../models/products';
 
 export interface ProductStateModel {
-  productResponse:any;
+  productResponse: Product | null;
   loading: boolean;
-  error: any;
+  error: unknown;
 }
 
 const initialState: ProductStateModel = {
