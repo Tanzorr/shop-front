@@ -1,10 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component,  inject, OnInit} from '@angular/core';
 import {ProductsService} from './services/products.service';
 import {Observable} from 'rxjs';
-import {ProductResponse} from '../../../models/products';
+import {ProductsResponse} from '../../../models/products';
 import {AsyncPipe} from '@angular/common';
 import {ProductComponent} from '../../../components/product/product.component';
-import {PageChangedEvent} from 'ngx-bootstrap/pagination';
 import {PaginationComponent} from '../../../components/pagination/pagination.component';
 import {SearchComponent} from '../../../components/search/search.component';
 
@@ -22,20 +21,18 @@ import {SearchComponent} from '../../../components/search/search.component';
 })
 export class ProductListComponent implements OnInit {
   private _productsService = inject(ProductsService);
-  productsResponse$: Observable<ProductResponse> = this._productsService.productsResponse$;
-  productsLoading$: Observable<boolean> = this._productsService.productsLoading$;
+  productsResponse$: Observable<ProductsResponse | null> = this._productsService.productsResponse$;
 
   ngOnInit(): void {
     this._productsService.getProducts({});
   }
 
-  changePage(url: any) {
-    const urlArr = url.toString().trim().split('=');
-    const pageNumber = urlArr[urlArr.length - 1];
-    this._productsService.getProducts({page: pageNumber})
+  changePage(url: string | null): void {
+
+    this._productsService.changePage(url);
   }
 
-  getSearchValue($event: string) {
-    this._productsService.getProducts({search: $event})
+  getSearchValue($event: string | null):void {
+    this._productsService.searchValue($event)
   }
 }

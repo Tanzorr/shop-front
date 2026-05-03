@@ -1,11 +1,13 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject} from '@angular/core';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs';
 import {NgClass} from '@angular/common';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-search',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
     NgClass
@@ -14,26 +16,21 @@ import {NgClass} from '@angular/common';
   styleUrl: './search.component.scss'
 })
 export class SearchComponent {
-  private _fb: FormBuilder = new FormBuilder();
-  searchForm: FormGroup;
+  private readonly fb = inject(FormBuilder);
+
+  searchForm = this.fb.group({ query: [''] });
 
   @Input() customClass: string = '';
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>();
 
   constructor() {
-    this.searchForm = this._fb.group({
-      query: [''],
-    });
-
-    this.searchForm
-      .get('query')
-      ?.valueChanges.pipe(
+    this.searchForm.get('query')?.valueChanges.pipe(
       debounceTime(300),
-      distinctUntilChanged()
-    )
-      .subscribe((query: string) => {
-        this.search.emit(query.trim());
-      });
+      distinctUntilChanged(),
+      takeUntilDestroyed()
+    ).subscribe((query: string) => {
+      this.search.emit(query.trim());
+    });
   }
 
   clearSearch(): void {

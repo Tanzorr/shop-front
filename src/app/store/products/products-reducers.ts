@@ -1,18 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
-import { getProductsSuccess } from './products-actions';
-import { ProductResponse} from '../models/products';
+
+import { ProductsResponse} from '../../models/products';
+import {getProductsFailure, getProductsSuccess} from './products-actions';
 
 export interface ProductsStateModel {
-  productsResponse: ProductResponse | null;
+  productsResponse: ProductsResponse | null; // Changed to allow null for initial state
   loading: boolean;
   error: any;
+  selectedCategoryIds?: number[]; // Optional property to hold selected category IDs
 }
 
-
-
-export interface ProductsState {
-  products: ProductsStateModel;
-}
 
 const initialState: ProductsStateModel = {
   productsResponse: null,
@@ -27,5 +24,11 @@ export const productsReducer = createReducer(
     productsResponse: products,
     loading: false,
     error: null,
+  })),
+
+  on(getProductsFailure, (state, {error}) => ({
+    ...state,
+    loading: false,
+    error,
   }))
 );

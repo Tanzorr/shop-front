@@ -1,19 +1,16 @@
 import {PageLinks} from './pagination';
 
-export interface Product {
+export interface Category {
   id: number;
   name: string;
   description: string;
-  sale_price: number;
-  stock: number;
-  categoryId: number;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface ProductsResponse {
+export interface CategoryResponse {
   currentPage: number;
-  data: Product[];
+  data: Category[];
   firstPageUrl: string;
   from: number;
   lastPage: number;
@@ -26,4 +23,3 @@ export interface ProductsResponse {
   next_page_url: string | null;
   prev_page_url: string | null;
 }
-
