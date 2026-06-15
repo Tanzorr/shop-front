@@ -16,6 +16,14 @@ import {productReducer} from './store/product/product-reducers';
 import {ProductEffects} from './store/product/product-effect';
 import {provideRouterStore, RouterStateSerializer} from '@ngrx/router-store';
 import {CustomSerializer} from './store/route/router-sate-serializer';
+import {adminOrdersReducer} from './admin/orders/store/admin-orders-reducers';
+import {AdminOrdersEffects} from './admin/orders/store/admin-orders-effects';
+import {adminProductsReducer} from './admin/products/store/admin-products-reducers';
+import {AdminProductsEffects} from './admin/products/store/admin-products-effects';
+import {adminCategoriesReducer} from './admin/categories/store/admin-categories-reducers';
+import {AdminCategoriesEffects} from './admin/categories/store/admin-categories-effects';
+import {adminWarehouseReducer} from './admin/warehouse/store/admin-warehouse-reducers';
+import {AdminWarehouseEffects} from './admin/warehouse/store/admin-warehouse-effects';
 
 
 
@@ -29,11 +37,19 @@ export const appConfig: ApplicationConfig = {
       productsReducer,
       categoriesReducer,
       productReducer,
+      adminOrdersReducer,
+      adminProductsReducer,
+      adminCategoriesReducer,
+      adminWarehouseReducer,
     }),
     provideEffects([
       ProductsEffects,
       CategoriesEffects,
-      ProductEffects
+      ProductEffects,
+      AdminOrdersEffects,
+      AdminProductsEffects,
+      AdminCategoriesEffects,
+      AdminWarehouseEffects
     ]),
     provideStoreDevtools({
       maxAge: 25, // Optional: number of actions to retain

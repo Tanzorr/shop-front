@@ -28,8 +28,8 @@ export class SearchComponent {
       debounceTime(300),
       distinctUntilChanged(),
       takeUntilDestroyed()
-    ).subscribe((query: string) => {
-      this.search.emit(query.trim());
+    ).subscribe((query: string | null) => {
+      this.search.emit((query ?? '').trim());
     });
   }
 
