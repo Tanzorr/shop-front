@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -20,6 +21,10 @@ import { TransferStockModalComponent } from '../../modals/transfer-stock-modal/t
 export class StockLevelsComponent implements OnInit {
   private store: Store<RootState> = inject(Store);
   private fb = inject(FormBuilder);
+  private destroyRef = inject(DestroyRef);
+
+  readonly pageSize = 20;
+  currentPage = 1;
 
   stockLevels$ = this.store.select(adminWarehouseStockLevelsSelector);
   loading$ = this.store.select(adminWarehouseLoadingSelector);
@@ -36,14 +41,17 @@ export class StockLevelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.refresh();
-    this.stockLevels$.subscribe((levels) => {
+    this.stockLevels$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((levels) => {
       if (levels.length) {
         this.allStockLevels = levels;
       }
+      // Keep the current page within bounds when the dataset changes.
+      this.currentPage = Math.min(this.currentPage, this.totalPages(levels));
     });
   }
 
   refresh(): void {
+    this.currentPage = 1;
     this.store.dispatch(getStockLevels());
   }
 
@@ -61,7 +69,21 @@ export class StockLevelsComponent implements OnInit {
       params.set('low_stock_only', '1');
     }
 
+    this.currentPage = 1;
     this.store.dispatch(getStockLevels(params.toString() || undefined));
+  }
+
+  pagedLevels(levels: StockLevel[]): StockLevel[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return levels.slice(start, start + this.pageSize);
+  }
+
+  totalPages(levels: StockLevel[]): number {
+    return Math.max(1, Math.ceil(levels.length / this.pageSize));
+  }
+
+  goToPage(page: number, total: number): void {
+    this.currentPage = Math.min(Math.max(1, page), total);
   }
 
   uniqueWarehouses(levels: StockLevel[]): { id: number; name: string }[] {

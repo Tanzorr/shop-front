@@ -37,7 +37,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (level of stockLevels; track level.productId + '-' + level.warehouseId) {
+      @for (level of pagedLevels(stockLevels); track level.productId + '-' + level.warehouseId) {
         <tr [class.table-danger]="level.isLowStock">
           <td>{{ level.productName }}</td>
           <td>{{ level.sku }}</td>
@@ -54,6 +54,32 @@
       }
     </tbody>
   </table>
+
+  @if (totalPages(stockLevels) > 1) {
+    <nav class="d-flex align-items-center justify-content-between">
+      <span class="text-muted">
+        Page {{ currentPage }} of {{ totalPages(stockLevels) }} ({{ stockLevels.length }} items)
+      </span>
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm"
+          [disabled]="currentPage === 1"
+          (click)="goToPage(currentPage - 1, totalPages(stockLevels))"
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm"
+          [disabled]="currentPage === totalPages(stockLevels)"
+          (click)="goToPage(currentPage + 1, totalPages(stockLevels))"
+        >
+          Next
+        </button>
+      </div>
+    </nav>
+  }
 }
 
 @if (adjustTarget) {
