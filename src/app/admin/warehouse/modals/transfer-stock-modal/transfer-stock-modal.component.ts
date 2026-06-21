@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Input, Output, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
@@ -6,6 +7,7 @@ import { take } from 'rxjs';
 import { RootState } from '../../../../models/root-state';
 import { transferStock, transferStockFailure, transferStockSuccess } from '../../store/admin-warehouse-actions';
 import { StockLevel } from '../../../shared/models/warehouse.model';
+import { extractErrorMessage } from '../../../shared/utils/extract-error-message';
 
 @Component({
   selector: 'app-transfer-stock-modal',
@@ -24,6 +26,10 @@ export class TransferStockModalComponent {
   private store: Store<RootState> = inject(Store);
   private fb = inject(FormBuilder);
   private actions$ = inject(Actions);
+  private destroyRef = inject(DestroyRef);
+
+  readonly submitting = signal(false);
+  readonly error = signal<string | null>(null);
 
   form = this.fb.group({
     toWarehouseId: [null as number | null, Validators.required],
@@ -38,10 +44,21 @@ export class TransferStockModalComponent {
     }
 
     const value = this.form.getRawValue();
+    this.error.set(null);
+    this.submitting.set(true);
 
-    this.actions$.pipe(ofType(transferStockSuccess, transferStockFailure), take(1)).subscribe((action) => {
-      this.closed.emit(action.type === transferStockSuccess.type);
-    });
+    this.actions$
+      .pipe(ofType(transferStockSuccess, transferStockFailure), take(1), takeUntilDestroyed(this.destroyRef))
+      .subscribe((action) => {
+        this.submitting.set(false);
+
+        if (action.type === transferStockSuccess.type) {
+          this.closed.emit(true);
+          return;
+        }
+
+        this.error.set(extractErrorMessage((action as ReturnType<typeof transferStockFailure>).error));
+      });
 
     this.store.dispatch(
       transferStock({

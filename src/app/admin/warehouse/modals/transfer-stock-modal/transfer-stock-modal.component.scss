@@ -1,11 +1,14 @@
-.modal-backdrop {
+// Custom names (not Bootstrap's .modal-backdrop/.modal-dialog) — Bootstrap sets
+// `pointer-events: none` on .modal-dialog, which would let clicks fall through
+// to the overlay and close the modal on every click.
+.app-modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 
-.modal-dialog {
+.app-modal-card {
   position: fixed;
   top: 50%;
   left: 50%;

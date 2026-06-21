@@ -1,6 +1,6 @@
-<div class="modal-backdrop" (click)="cancel()"></div>
+<div class="app-modal-overlay" (click)="cancel()"></div>
 
-<div class="modal-dialog">
+<div class="app-modal-card">
   <h2>Adjust stock</h2>
   <p>Product #{{ productId }} / Warehouse #{{ warehouseId }}</p>
 
@@ -15,9 +15,15 @@
       <input class="form-control" formControlName="comment" />
     </div>
 
+    @if (error()) {
+      <div class="alert alert-danger" role="alert">{{ error() }}</div>
+    }
+
     <div class="modal-actions">
-      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Apply</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="submitting()">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || submitting()">
+        {{ submitting() ? 'Applying…' : 'Apply' }}
+      </button>
     </div>
   </form>
 </div>
