@@ -7,7 +7,8 @@ import {provideStore} from '@ngrx/store';
 import {productsReducer} from './store/products/products-reducers';
 import {provideEffects} from '@ngrx/effects';
 
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {authInterceptor} from './auth/interceptors/auth.interceptor';
 import {provideStoreDevtools} from '@ngrx/store-devtools';
 import {categoriesReducer} from './store/categories/categories-reducers';
 import {CategoriesEffects} from './store/categories/categories-effects';
@@ -32,7 +33,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideStore({
       productsReducer,
       categoriesReducer,
