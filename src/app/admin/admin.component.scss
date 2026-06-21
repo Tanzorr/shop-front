@@ -4,6 +4,8 @@
 }
 
 .admin-sidebar {
+  display: flex;
+  flex-direction: column;
   width: 220px;
   flex-shrink: 0;
   padding: 1rem;
@@ -34,6 +36,27 @@
       &:hover:not(.active) {
         background-color: #e9ecef;
       }
+    }
+  }
+
+  &__logout {
+    // Pushed to the bottom of the full-height sidebar, clearly separated
+    // from the nav links above.
+    margin-top: auto;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dc3545;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    color: #dc3545;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+
+    &:hover {
+      background-color: #dc3545;
+      color: #fff;
     }
   }
 }
